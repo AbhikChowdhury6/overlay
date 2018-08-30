@@ -1,0 +1,33 @@
+#i2c stuff
+sudo apt-get install -y i2c-tools python-smbus
+
+
+Disable HDMI
+
+#add this to /etc/rc.local
+
+/usr/bin/tvservice -o
+
+
+
+
+
+Disable ACT LED on pi zero
+
+paste this into /boot/config.txt
+
+# Disable the ACT LED on the Pi Zero.
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=on
+
+
+
+Disable LEDs on pi3s i believe
+
+# Disable the ACT LED.
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=off
+
+# Disable the PWR LED.
+dtparam=pwr_led_trigger=none
+dtparam=pwr_led_activelow=off

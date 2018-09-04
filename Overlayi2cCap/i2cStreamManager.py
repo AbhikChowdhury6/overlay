@@ -4,28 +4,33 @@
 import time
 import smbus
 import os
+
 #import all of the devices on the bus for now
-
-
-
+from libraries.i2cAbhiksExcitingECG import ECG
+from libraries.i2cAbhiksGreatGSRSensor import GSR
+from libraries.i2cAbhiksBeautifulBreathSensor import BREATH
+from libraries.i2cMPU-6050 import MPU6050
+from libraries.12cMPU-9250 import MPU9250
 
 bus = smbus.SMBus(1)
 
 # extanciate and configure all of the objects
-ECG =
-GSR =
-Breath =
-MPU6050 =
-MPU9250 =
+ecg = ECG()
+gsr = GSR()
+breath = BREATH()
+mpu6050 = MPU6050()
+mpu9250 = MPU9250()
 
 millis = int(round(time.time() * 1000))
 
+print time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis)
+
 #open files to log
-ECGf = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-GSRf = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-Breathf = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-MPU6050f = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-MPU9250f = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
+ECGf = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+GSRf = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+Breathf = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+MPU6050f = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+MPU9250f = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
 
 divider = 0
 second = 0
@@ -59,11 +64,11 @@ while True:
         MPU6050f.close()
         MPU9250f.close()
         #Open new files to log
-        ECGf = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-        GSRf = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-        Breathf = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-        MPU6050f = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
-        MPU9250f = open("MPU6050" + str(time.time()) + "." + str(millis), "a+")
+        ECGf = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+	GSRf = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+	Breathf = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+	MPU6050f = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+	MPU9250f = open("MPU6050" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
 
   divider = divider + 1
   time.sleep(0.01 - ((time.time() - starttime) % 0.01))

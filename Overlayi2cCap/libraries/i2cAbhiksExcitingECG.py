@@ -1,6 +1,7 @@
 class ECG:
-    def __init__(self):
+    def __init__(self, bus):
         self.address = 0x54
+	self.REFRESH_RATE = 1
         firstbyte =  bus.read_byte(self.address)
         secondbyte = bus.read_byte(self.address)
         #in case the bytes start off being read wrong

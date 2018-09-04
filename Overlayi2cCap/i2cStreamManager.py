@@ -45,19 +45,19 @@ starttime=time.time()
 while True:
   #a bunch of if statementsfor each sensors
   if (divider % ecg.REFRESH_RATE == 0):
-    ECGf.write(str(ecg.read(bus)))
+    ECGf.write(str(ecg.read(bus)) + ",")
 
   if (divider % gsr.REFRESH_RATE == 0):
-    GSRf.write(str(gsr.read(bus)))
+    GSRf.write(str(gsr.read(bus)) + ",")
 
   if (divider % breath.REFRESH_RATE == 0):
-    Breathf.write(str(breath.read(bus)))
+    Breathf.write(str(breath.read(bus)) + ",")
 
   if (divider % mpu6050.REFRESH_RATE == 0):
-    MPU6050f.write(str(mpu6050.read(bus)))
+    MPU6050f.write(str(mpu6050.read(bus)) + ",")
 
   if (divider % mpu9250.REFRESH_RATE == 0):
-    MPU9250f.write(str(mpu9250.read(bus)))
+    MPU9250f.write(str(mpu9250.read(bus)) + ",")
 
   if (divider % 100 == 0):
       second = second + 1

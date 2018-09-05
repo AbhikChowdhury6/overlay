@@ -1,5 +1,7 @@
+import time
+
 class MPU60501:
-	def __init__(self, bus):
+	def __init__(self, bus, path):
 		self.address = 0x69
 		self.REFRESH_RATE = 1
 		self.bus = bus
@@ -12,13 +14,13 @@ class MPU60501:
 		self.bus.write_byte_data(self.address, power_mgmt_1, 0)
 
 		#create files to log
-        millis = int(round(time.time() * 1000))
-        ACCEL_X_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-        ACCEL_Y_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-        ACCEL_Z_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-        GYRO_X_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-        GYRO_Y_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-        GYRO_Z_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+                millis = int(round(time.time() * 1000))
+                self.ACCEL_X_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+                self.ACCEL_Y_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+                self.ACCEL_Z_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+                self.GYRO_X_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+                self.GYRO_Y_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+                self.GYRO_Z_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
 
 	def read_word(self,adr):
     		high = self.bus.read_byte_data(self.address, adr)
@@ -34,18 +36,18 @@ class MPU60501:
         		return val
 
 	def log(self,bus):
-		ACCEL_X_f.write(str(self.read_word_2c(0x3b)) + ",")
-		ACCEL_Y_f.write(str(self.read_word_2c(0x3d)) + ",")
-		ACCEL_Z_f.write(str(self.read_word_2c(0x3f)) + ",")
-		GYRO_X_f.write(str(self.read_word_2c(0x43)) + ",")
-		GYRO_Y_f.write(str(self.read_word_2c(0x45)) + ",")
-		GYRO_Z_f.write(str(self.read_word_2c(0x47)) + ",")
+		self.ACCEL_X_f.write(str(self.read_word_2c(0x3b)) + ",")
+		self.ACCEL_Y_f.write(str(self.read_word_2c(0x3d)) + ",")
+		self.ACCEL_Z_f.write(str(self.read_word_2c(0x3f)) + ",")
+		self.GYRO_X_f.write(str(self.read_word_2c(0x43)) + ",")
+		self.GYRO_Y_f.write(str(self.read_word_2c(0x45)) + ",")
+		self.GYRO_Z_f.write(str(self.read_word_2c(0x47)) + ",")
 		return True
 
-    def end():
-		ACCEL_X_f.close()
-		ACCEL_Y_f.close()
-		ACCEL_Z_f.close()
-		GYRO_X_f.close()
-		GYRO_Y_f.close()
-		GYRO_Z_f.close()
+        def end(self):
+		self.ACCEL_X_f.close()
+		self.ACCEL_Y_f.close()
+		self.ACCEL_Z_f.close()
+		self.GYRO_X_f.close()
+		self.GYRO_Y_f.close()
+		self.GYRO_Z_f.close()

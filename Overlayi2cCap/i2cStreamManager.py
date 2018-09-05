@@ -16,7 +16,7 @@ bus = smbus.SMBus(1)
 
 #defince product name
 PRODUCT_NAME = "AbhiksPoppinPostureCorrector"
-DATA_PATH = ""
+DATA_PATH = "AHH"
 
 
 # extanciate and configure all of the objects
@@ -28,7 +28,7 @@ mpu92500 = MPU92500(bus, DATA_PATH)
 
 
 
-print time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis)
+print time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime())
 divider = 1
 second = 0
 starttime=time.time()

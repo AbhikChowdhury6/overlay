@@ -9,73 +9,45 @@ import os
 from libraries.i2cAbhiksExcitingECG import ECG
 from libraries.i2cAbhiksGreatGSRSensor import GSR
 from libraries.i2cAbhiksBeautifulBreathSensor import BREATH
-from libraries.i2cMPU6050 import MPU6050
-from libraries.i2cMPU9250 import MPU9250
+from libraries.i2cMPU60501 import MPU60501
+from libraries.i2cMPU92500 import MPU92500
 
 bus = smbus.SMBus(1)
-
-
 
 #defince product name
 PRODUCT_NAME = "AbhiksPoppinPostureCorrector"
 DATA_PATH = ""
+
+
 # extanciate and configure all of the objects
-ecg = ECG(bus)
-gsr = GSR(bus)
-breath = BREATH(bus)
-mpu6050 = MPU6050(bus)
-mpu9250 = MPU9250(bus)
+ecg = ECG(bus, DATA_PATH)
+gsr = GSR(bus, DATA_PATH)
+breath = BREATH(bus, DATA_PATH)
+mpu60501 = MPU60501(bus, DATA_PATH)
+mpu92500 = MPU92500(bus, DATA_PATH)
 
-mpu6050.address = 0x69
 
-millis = int(round(time.time() * 1000))
 
 print time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis)
-
-#open files to log
-ECGf = open(DATA_PATH + "ECG-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-GSRf = open(DATA_PATH + "GSR-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-Breathf = open(DATA_PATH + "BREATH-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-MPU6050f = open(DATA_PATH + "MPU6050-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-MPU9250f = open(DATA_PATH + "MPU9250-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-
 divider = 1
 second = 0
 starttime=time.time()
 while True:
   #a bunch of if statementsfor each sensors
   if (divider % ecg.REFRESH_RATE == 0):
-    ECGf.write(str(ecg.read(bus)) + ",")
+      ecg.log(bus)
 
   if (divider % gsr.REFRESH_RATE == 0):
-    GSRf.write(str(gsr.read(bus)) + ",")
+      gsr.log(bus)
 
   if (divider % breath.REFRESH_RATE == 0):
-    Breathf.write(str(breath.read(bus)) + ",")
+      breath.log(bus)
 
-  if (divider % mpu6050.REFRESH_RATE == 0):
-    MPU6050f.write(str(mpu6050.read(bus)) + ",")
+  if (divider % mpu60501.REFRESH_RATE == 0):
+      mpu60501.log(bus)
 
-  if (divider % mpu9250.REFRESH_RATE == 0):
-    MPU9250f.write(str(mpu9250.read(bus)) + ",")
-
-  if (divider % 100 == 0):
-      second = second + 1
-      if (second % 60 == 0):
-        second = 0
-        millis = int(round(time.time() * 1000))
-        #close all files
-        ECGf.close()
-        GSRf.close()
-        Breathf.close()
-        MPU6050f.close()
-        MPU9250f.close()
-        #Open new files to log
-        ECGf = open(DATA_PATH + "ECG-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-	GSRf = open(DATA_PATH + "GSR-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-	Breathf = open(DATA_PATH + "BREATH-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-	MPU6050f = open(DATA_PATH + "MPU6050-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-	MPU9250f = open(DATA_PATH + "MPU9250-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+  if (divider % mpu92500.REFRESH_RATE == 0):
+      mpu92500.log(bus)
 
   divider = divider + 1
   time.sleep(0.01 - ((time.time() - starttime) % 0.01))

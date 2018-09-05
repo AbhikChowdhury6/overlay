@@ -21,7 +21,7 @@ gsr = GSR()
 starttime=time.time()
 while True:
   val = gsr.read(bus)
-  h = int(val/8)
+  h = int(val-100/2)
   o = ""
   for _ in range(h):
       o = o +"#"

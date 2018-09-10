@@ -6,4 +6,4 @@ port=$3
 path="/media/chowderhat/18CE0051CE002998/"
 name=$path$productName-$sensorName-$t-.h264
 echo $name
-ffmpeg -i input -c:v libx264 -preset ultrafast -crf 0 $name
+ffmpeg -i /dev/video1 -c:v libx264 -preset ultrafast -crf 0 $name

@@ -34,14 +34,6 @@ while True:
   if (divider % gsr.REFRESH_RATE == 0):
       gsr.log(bus)
 
-  if (divider % breath.REFRESH_RATE == 0):
-      breath.log(bus)
-
-  if (divider % mpu60501.REFRESH_RATE == 0):
-      mpu60501.log(bus)
-
-  if (divider % mpu92500.REFRESH_RATE == 0):
-      mpu92500.log(bus)
 
   divider = divider + 1
   time.sleep(0.01 - ((time.time() - starttime) % 0.01))

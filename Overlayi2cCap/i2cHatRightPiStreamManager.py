@@ -7,8 +7,11 @@ import os
 
 #import all of the devices on the bus for now
 
-from libraries.i2cMPU60501 import MPU60501
-from libraries.i2cMPU92500 import MPU92500
+#from libraries.i2cMPU60501 import MPU60501
+#from libraries.i2cMPU92500 import MPU92500
+from libraries.i2cMAX30100 import MAX30100
+from libraries.i2cMLX90614 import MLX90614
+from libraries.i2cBMP280 import BMP280
 
 bus = smbus.SMBus(1)
 
@@ -19,9 +22,11 @@ DATA_PATH = "AHH"
 
 # extanciate and configure all of the objects
 
-mpu60501 = MPU60501(bus, DATA_PATH)
-mpu92500 = MPU92500(bus, DATA_PATH)
-
+#mpu60501 = MPU60501(bus, DATA_PATH)
+#mpu92500 = MPU92500(bus, DATA_PATH)
+max30100 = MAX30100(bus)
+mlx90614 = MLX90614(bus)
+bmp280 = BMP280(bus)
 
 
 print time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime())
@@ -30,20 +35,15 @@ second = 0
 starttime=time.time()
 while True:
   #a bunch of if statementsfor each sensors
-  if (divider % ecg.REFRESH_RATE == 0):
-      ecg.log(bus)
+  if (divider % max30100.REFRESH_RATE == 0):
+      max30100.log(bus)
 
-  if (divider % gsr.REFRESH_RATE == 0):
-      gsr.log(bus)
+  if (divider % mlx90614.REFRESH_RATE == 0):
+      mlx90614.log(bus)
 
-  if (divider % breath.REFRESH_RATE == 0):
-      breath.log(bus)
+  if (divider % bmp280.REFRESH_RATE == 0):
+      bmp280.log(bus)
 
-  if (divider % mpu60501.REFRESH_RATE == 0):
-      mpu60501.log(bus)
-
-  if (divider % mpu92500.REFRESH_RATE == 0):
-      mpu92500.log(bus)
 
   divider = divider + 1
   time.sleep(0.01 - ((time.time() - starttime) % 0.01))

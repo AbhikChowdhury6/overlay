@@ -4,4 +4,4 @@ productName=$2
 sensorName=$1
 name=/home/pi/$productName-$sensorName-$t-.wav
 echo $name
-arecord --device=hw:1,0 --format S16_LE --rate 44100 -c2 $name &
+arecord -D plughw:1 -c2 -r 48000 -f S32_LE -t wav -V stereo -v $name &

@@ -11,6 +11,7 @@ for filename in *.csv; do
     echo ${arrIN[0]}
     sensorName=${arrIN[1]}
     echo ${arrIN[1]}
+    echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     rm $filename
 done
@@ -22,6 +23,7 @@ for filename in *.wav; do
     echo ${arrIN[0]}
     sensorName=${arrIN[1]}
     echo ${arrIN[1]}
+    echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     rm $filename
 done
@@ -33,6 +35,7 @@ for filename in *.h264; do
     echo ${arrIN[0]}
     sensorName=${arrIN[1]}
     echo ${arrIN[1]}
+    echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     rm $filename
 done

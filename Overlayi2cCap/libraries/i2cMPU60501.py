@@ -15,12 +15,12 @@ class MPU60501:
 
 		#create files to log
                 millis = int(round(time.time() * 1000))
-                self.ACCEL_X_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-                self.ACCEL_Y_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-                self.ACCEL_Z_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-                self.GYRO_X_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-                self.GYRO_Y_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
-                self.GYRO_Z_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis), "a+")
+                self.ACCEL_X_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis) + ".csv", "a+")
+                self.ACCEL_Y_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis) + ".csv", "a+")
+                self.ACCEL_Z_f = open(self.DATA_PATH + "-" + self.name + "-ACCEL_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis) + ".csv", "a+")
+                self.GYRO_X_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_X-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis) + ".csv", "a+")
+                self.GYRO_Y_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Y-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis) + ".csv", "a+")
+                self.GYRO_Z_f = open(self.DATA_PATH + "-" + self.name + "-GYRO_Z-" + time.strftime('%d-%m-%Y-%H-%M-%S', time.localtime()) + "." + str(millis) + ".csv", "a+")
 
 	def read_word(self,adr):
     		high = self.bus.read_byte_data(self.address, adr)

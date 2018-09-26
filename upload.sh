@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #bash upload.sh chowder test_data pass 192.168.1.xxx
 IP=$4
 user=$1
@@ -14,7 +16,6 @@ for filename in *.csv; do
     echo ${arrIN[1]}
     echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
-    rm $filename
 done
 
 pkill arecord
@@ -27,7 +28,6 @@ for filename in *.wav; do
     echo ${arrIN[1]}
     echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
-    rm $filename
 done
 
 pkill raspivid
@@ -40,5 +40,6 @@ for filename in *.h264; do
     echo ${arrIN[1]}
     echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
     sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
+    echo rm $filename
     rm $filename
 done

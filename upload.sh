@@ -43,6 +43,6 @@ for filename in *.h264; do
     ssh $user@$IP mkdir -p $path/$productName/$sensorName
     echo rsync -r $filename $user@$IP:$path/$productName/$sensorName
     rsync -r $filename $user@$IP:$path/$productName/$sensorName
-    echo rm $filename
-    rm $filename
+    #echo rm $filename
+    #rm $filename
 done

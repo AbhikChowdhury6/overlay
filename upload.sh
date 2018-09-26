@@ -8,6 +8,7 @@ pass=$3
 
 #pkill python
 for filename in *.csv; do
+    [ -f "$filename" ] || break
     echo $filename
     arrIN=(${filename//-/ })
     productName=${arrIN[0]}
@@ -21,6 +22,7 @@ done
 
 pkill arecord
 for filename in *.wav; do
+    [ -f "$filename" ] || break
     echo $filename
     arrIN=(${filename//-/ })
     productName=${arrIN[0]}
@@ -34,6 +36,7 @@ done
 
 pkill raspivid
 for filename in *.h264; do
+    [ -f "$filename" ] || break
     echo $filename
     arrIN=(${filename//-/ })
     productName=${arrIN[0]}

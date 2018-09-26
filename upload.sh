@@ -14,8 +14,9 @@ for filename in *.csv; do
     echo ${arrIN[0]}
     sensorName=${arrIN[1]}
     echo ${arrIN[1]}
-    echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
-    sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
+    ssh $user@$IP mkdir -p $path/$productName/$sensorName
+    echo rsync -r $filename $user@$IP:$path/$productName/$sensorName
+    rsync -r $filename $user@$IP:$path/$productName/$sensorName
 done
 
 pkill arecord
@@ -26,8 +27,9 @@ for filename in *.wav; do
     echo ${arrIN[0]}
     sensorName=${arrIN[1]}
     echo ${arrIN[1]}
-    echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
-    sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
+    ssh $user@$IP mkdir -p $path/$productName/$sensorName
+    echo rsync -r $filename $user@$IP:$path/$productName/$sensorName
+    rsync -r $filename $user@$IP:$path/$productName/$sensorName
 done
 
 pkill raspivid
@@ -38,8 +40,9 @@ for filename in *.h264; do
     echo ${arrIN[0]}
     sensorName=${arrIN[1]}
     echo ${arrIN[1]}
-    echo sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
-    sshpass -p $pass scp $filename $user@$IP:$path/$productName/$sensorName
+    ssh $user@$IP mkdir -p $path/$productName/$sensorName
+    echo rsync -r $filename $user@$IP:$path/$productName/$sensorName
+    rsync -r $filename $user@$IP:$path/$productName/$sensorName
     echo rm $filename
     rm $filename
 done

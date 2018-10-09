@@ -1,0 +1,4 @@
+#include "Pods/Target Support Files/Pods-Sample/Pods-Sample.staging.xcconfig"
+
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) kEnvironment="@\"staging\""

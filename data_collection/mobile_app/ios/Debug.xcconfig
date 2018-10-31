@@ -1,3 +1,0 @@
-#include "Pods/Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"
-
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) kEnvironment="@\"debug\""
